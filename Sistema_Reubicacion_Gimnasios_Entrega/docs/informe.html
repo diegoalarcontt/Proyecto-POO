@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Informe Proyecto POO - Sistema de Reubicación de Gimnasios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 35px;
+            line-height: 1.5;
+            background-color: #f7f7f7;
+            color: #222;
+        }
+        main {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        h1, h2, h3 {
+            color: #1f3a5f;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e8eef7;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 15px;
+            overflow-x: auto;
+            border-radius: 6px;
+        }
+        .nota {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Sistema de Reubicación de Usuarios Afectados por el Cierre de Gimnasios</h1>
+
+    <h2>1. Descripción del problema</h2>
+    <p>
+        Durante los últimos años, muchas personas han contratado membresías en gimnasios con el objetivo de mejorar su salud y condición física. Sin embargo, el cierre repentino de centros deportivos puede dejar a los usuarios sin acceso al servicio contratado y sin información clara sobre alternativas disponibles. Por esto, el proyecto propone un sistema que permita buscar, comparar y recomendar gimnasios alternativos según las necesidades del usuario.
+    </p>
+
+    <h2>2. Análisis del problema</h2>
+    <p>
+        El problema se sitúa en el contexto de usuarios que pierden el acceso a su gimnasio por cierre de una sede o cadena deportiva. Los principales elementos que participan son el usuario afectado, los gimnasios disponibles, las membresías ofrecidas, los servicios de cada gimnasio y la solicitud de reubicación. El sistema interactúa con el usuario mediante una interfaz gráfica donde se ingresan sus preferencias y se muestran recomendaciones ordenadas por compatibilidad. En la versión actual se cargaron gimnasios y sedes de Santiago y comunas cercanas, usando valores referenciales para poder probar la comparación de precios, membresías y servicios.
+    </p>
+
+    <h2>3. Definición de requerimientos</h2>
+
+    <h3>Caso de uso 1: Buscar recomendación de gimnasio</h3>
+    <p>
+        El usuario ingresa su nombre, comuna, presupuesto máximo, tipo de membresía y servicios preferidos. El sistema evalúa los gimnasios disponibles y muestra una lista ordenada por puntaje de recomendación.
+    </p>
+
+    <h3>Caso de uso 2: Mostrar gimnasios disponibles</h3>
+    <p>
+        El usuario puede revisar todos los gimnasios registrados en el sistema, incluyendo comuna, precio mensual, membresías y servicios ofrecidos.
+    </p>
+
+    <h3>Caso de uso 3: Crear solicitud de reubicación</h3>
+    <p>
+        Después de revisar las recomendaciones, el usuario selecciona un gimnasio y el sistema crea una solicitud de reubicación con estado pendiente.
+    </p>
+
+    <h2>4. Diseño</h2>
+    <p>
+        El sistema fue diseñado utilizando Programación Orientada a Objetos. Se definieron clases para representar usuarios, administradores, gimnasios, membresías, solicitudes y el sistema principal de recomendación.
+    </p>
+
+    <h3>Diagrama de clases</h3>
+    <pre>
+Persona
+ ├── Usuario
+ └── Administrador
+
+Gimnasio contiene una o más Membresias.
+SolicitudReubicacion relaciona un Usuario con un Gimnasio.
+SistemaReubicacion administra los gimnasios y las solicitudes.
+    </pre>
+
+    <p>
+        El diagrama UML completo se encuentra en el archivo <strong>docs/DIAGRAMA_UML.md</strong>.
+    </p>
+
+    <h3>Diagrama de secuencia</h3>
+    <p>
+        El diagrama de secuencia para el caso de uso "Buscar recomendación de gimnasio" se encuentra en el archivo <strong>docs/DIAGRAMA_SECUENCIA.md</strong>.
+    </p>
+
+    <h2>5. Implementación</h2>
+    <p>
+        La aplicación fue implementada en Python utilizando Tkinter para la interfaz gráfica. La lógica principal se encuentra separada en archivos dentro de la carpeta <strong>src</strong>. El archivo <strong>models.py</strong> contiene las clases del sistema, <strong>sistema.py</strong> contiene la lógica de recomendación y <strong>gui.py</strong> contiene la interfaz gráfica.
+    </p>
+    <p>
+        La base de datos inicial se encuentra cargada directamente en el código como datos de demostración. La versión actual considera 26 gimnasios o sedes de Santiago y alrededores. Los precios y horarios se consideran referenciales, ya que en la realidad pueden variar por promociones, matrícula, contrato y sede.
+    </p>
+
+    <h2>6. Pruebas</h2>
+
+    <table>
+        <tr>
+            <th>Prueba</th>
+            <th>Descripción</th>
+            <th>Resultado esperado</th>
+        </tr>
+        <tr>
+            <td>Buscar recomendación</td>
+            <td>Se ingresa un usuario de Santiago Centro con presupuesto de $40.000 y servicios Máquinas, Duchas y Clases grupales.</td>
+            <td>El sistema muestra gimnasios recomendados ordenados por puntaje.</td>
+        </tr>
+        <tr>
+            <td>Mostrar gimnasios</td>
+            <td>Se presiona el botón para mostrar todos los gimnasios disponibles.</td>
+            <td>El sistema lista todos los gimnasios cargados en la aplicación.</td>
+        </tr>
+        <tr>
+            <td>Crear solicitud</td>
+            <td>Después de buscar recomendaciones, se selecciona un gimnasio y se crea una solicitud.</td>
+            <td>El sistema muestra un mensaje confirmando la solicitud con estado pendiente.</td>
+        </tr>
+    </table>
+
+    <p class="nota">
+        Aquí se deben agregar las capturas de pantalla de las pruebas realizadas en la aplicación. Las imágenes pueden guardarse en la carpeta <strong>docs/img</strong> y enlazarse con rutas relativas.
+    </p>
+
+    <h2>7. Dificultades encontradas</h2>
+    <p>
+        Una dificultad del proyecto fue definir un criterio simple para recomendar gimnasios. Se resolvió utilizando un sistema de puntaje que considera comuna, presupuesto, tipo de membresía y servicios solicitados. Otra dificultad fue separar la interfaz gráfica de la lógica del sistema, lo cual se solucionó organizando el proyecto en distintos archivos.
+    </p>
+
+    <h2>8. Bugs presentes</h2>
+    <p>
+        Actualmente no se detectan bugs críticos. Una mejora futura sería permitir guardar usuarios, gimnasios y solicitudes en archivos externos para conservar los datos después de cerrar la aplicación.
+    </p>
+
+    <h2>9. Enlace al repositorio GitHub</h2>
+    <p>
+        Agregar aquí el enlace al repositorio GitHub del proyecto.
+    </p>
+
+</main>
+</body>
+</html>
